@@ -41,7 +41,7 @@ resource "azurerm_resource_group" "tamops" {
   name     = "ashtfstates"
   location = "uksouth"
 }
- 
+
 # Storage Account
 resource "azurerm_storage_account" "sa" {
   name                     = "ashleightf"
@@ -50,16 +50,16 @@ resource "azurerm_storage_account" "sa" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
- 
+
 # Role Assignment for the Service Principal (Storage Account Contributor)
 resource "azurerm_role_assignment" "storage_account_contributor" {
-  principal_id   = "200fc413-964d-4194-a663-f558e9e26332"  # Object ID of the service principal
+  principal_id         = "200fc413-964d-4194-a663-f558e9e26332" # Object ID of the service principal
   role_definition_name = "Storage Account Contributor"
-  scope          = azurerm_storage_account.sa.id
+  scope                = azurerm_storage_account.sa.id
 }
 
 resource "azurerm_role_assignment" "rg_role_assignment" {
-  principal_id   = "200fc413-964d-4194-a663-f558e9e26332" # Object ID of the service principal
+  principal_id         = "200fc413-964d-4194-a663-f558e9e26332" # Object ID of the service principal
   role_definition_name = "Storage Account Contributor"
-  scope          = azurerm_resource_group.tamops.id
+  scope                = azurerm_resource_group.tamops.id
 }
